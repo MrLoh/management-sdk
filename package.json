@@ -6,30 +6,20 @@
   "repository": "graphcms/management-sdk",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/management.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist/**/*"
   ],
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch --target node",
-    "build": "tsdx build --target node",
-    "test": "tsdx test",
-    "lint": "tsdx lint --ignore-pattern src/generated/**",
-    "prepare": "graphql-codegen && tsdx build",
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json",
+    "prepare": "rm -rf ./dist && yarn generate && yarn build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "generate": "graphql-codegen"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
   },
   "size-limit": [
     {
@@ -49,15 +39,17 @@
     "@graphql-codegen/cli": "1.21.3",
     "@graphql-codegen/typescript": "1.21.1",
     "@size-limit/preset-big-lib": "^4.10.1",
+    "@types/nanoid": "2.1.0",
     "@types/node": "14.14.35",
-    "husky": "5.2.0",
+    "prettier": "2.2.1",
     "size-limit": "4.10.1",
-    "tsdx": "0.14.1",
-    "tslib": "2.1.0",
+    "tslint": "6.1.3",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-plugin-prettier": "2.3.0",
     "typescript": "4.2.3"
   },
   "dependencies": {
-    "@types/nanoid": "2.1.0",
     "graphql": "15.5.0",
     "graphql-request": "3.4.0",
     "nanoid": "3.1.22"
